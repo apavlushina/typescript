@@ -5,12 +5,22 @@ const web = new WebClient(process.env.SLACK_ACCESS_TOKEN);
 
 web.conversations
   .list({
-    types: "public_channel, private_channel"
+    types: "private_channel"
   })
   .then(data => {
     console.log(
-      (data as any).channels.filter((channel: any) => {
-        channel.name.includes("code");
+      (data as any).channels.find((channel: any) => {
+        return channel.name == "code-32";
       })
     );
   });
+
+// web.chat.postMessage({
+//   text: "Hello class from Alexandra!",
+//   channel: "GMTNDV0MR"
+// });
+
+// web.chat.postMessage(
+//   "GMTNDV0MR" as any,
+//   JSON.stringify("Hello group-32 from slack-API") as any
+// );
